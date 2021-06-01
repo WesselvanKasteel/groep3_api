@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserStoreRequest extends FormRequest
+class UserRegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -46,5 +46,5 @@ class UserStoreRequest extends FormRequest
             'password.required' => 'Password is required!',
             'password.min' => 'Password needs to be at least six characters long!',
         ];
-    }    
+    }
 }

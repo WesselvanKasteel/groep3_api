@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -19,7 +20,7 @@ class AuthController extends Controller
         $this->middleware('auth:api', ['except' => ['register', 'login']]);
     }
 
-    public function register(UserStoreRequest $request)
+    public function register(UserRegisterRequest $request)
     {
         $request->validated();
 
@@ -41,8 +42,10 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(UserLoginRequest $request)
     {
+        $request->validated();
+
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
