@@ -28,5 +28,20 @@ class UsersTableSeeder extends Seeder
             'phone_number' => '06121212',
             'date_of_birth' => now(),
         ]);
+
+        DB::table('users')->insert([
+            'id' => Uuid::generate(),
+            'first_name' => 'Wessel',
+            'prefix' => 'van',
+            'last_name' => 'Kasteel',
+            'country' => 'Nederland',
+            'province' => 'Zuid-Holland',
+            'city' => 'Leiden',
+            'address' => 'Luisterlaan 13',
+            'email' => 'wessel@mail.com',
+            'password' => bcrypt('bimpsert'),
+            'phone_number' => '0634343434',
+            'date_of_birth' => now(),
+        ]);        
     }
 }
