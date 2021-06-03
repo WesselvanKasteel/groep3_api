@@ -22,7 +22,6 @@ class RolesTableSeeder extends Seeder
         {
             DB::table('roles')->insert([
                 'id' => Uuid::generate(),
-                // 'user_id' => User::first()->id,
                 'role' => $role,
             ]);
         }

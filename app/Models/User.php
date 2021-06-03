@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Traits\Uuids;
+use App\Models\Vacancy;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Traits\Uuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -18,6 +19,11 @@ class User extends Authenticatable implements JWTSubject
     public function role()
     {
         return $this->hasOne(Role::class);
+    }
+
+    public function vacancies()
+    {
+        return $this->hasMany(Vacancy::class);
     }
 
     /**
@@ -50,6 +56,7 @@ class User extends Authenticatable implements JWTSubject
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'id' => 'string',
     ];
 
     /**
