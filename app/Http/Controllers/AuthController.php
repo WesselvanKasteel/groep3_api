@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
+use Webpatser\Uuid\Uuid;
 
 class AuthController extends Controller
 {
@@ -25,11 +26,18 @@ class AuthController extends Controller
         $request->validated();
 
         User::create([
+            'id' => Uuid::generate(),
             'first_name' => $request->first_name,
             'prefix' => $request->prefix,
             'last_name' => $request->last_name,
+            'country' => $request->country,
+            'province' => $request->province,
+            'city' => $request->city,
+            'address' => $request->address,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'phone_number' => $request->phone_number,
+            'date_of_birth' => $request->date_of_birth,
         ]);
 
         return response()->json([
@@ -60,7 +68,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function me() 
+    public function me()
     {
         return response()->json(auth()->user());
     }
