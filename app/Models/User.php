@@ -26,6 +26,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Vacancy::class);
     }
 
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
