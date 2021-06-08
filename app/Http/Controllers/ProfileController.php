@@ -57,7 +57,7 @@ class ProfileController extends Controller
 
 
     public function getUserData() {
-        $user = auth()->user()->first();
+        $user = auth()->user();
         $dateOfBirth = date(auth()->user()->date_of_birth);
         // $date = Carbon::createFromFormat('Y', $dateOfBirth);
         $dateOfBirthYear = Carbon::createFromFormat('Y-m-d', $dateOfBirth);
