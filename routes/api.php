@@ -30,4 +30,5 @@ Route::group(['prefix' => 'auth'], function() {
 });
 
 
-Route::put('/update-user', [ProfileController::class, 'updateUser']);
+Route::post('/update-user', [ProfileController::class, 'updateUser']);
+Route::get('/get-user-data', [ProfileController::class, 'getUserData']);

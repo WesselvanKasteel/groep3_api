@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Uuid\Uuid;
@@ -26,7 +27,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'tim@mail.com',
             'password' => bcrypt('bimpsert'),
             'phone_number' => '06121212',
-            'date_of_birth' => now(),
+            'date_of_birth' => Carbon::create(2012, 1, 31, 0),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
