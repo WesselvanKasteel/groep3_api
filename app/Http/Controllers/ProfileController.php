@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-
     public function generateRandomString($length = 24) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -72,4 +71,26 @@ class ProfileController extends Controller
         ], 201);
     }
 
+    public function show($id)
+    {
+        $id = auth()->user()->id;
+        $user = User::where('id', $id)->first();
+        return response()->json($user, 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $id = auth()->user()->id;
+        $user = User::where('id', $id)->first();
+
+        $user->update([
+            'country' => $request->country,
+        ]);
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'User successfully updated!',
+        ], 200);
+    }
 }
