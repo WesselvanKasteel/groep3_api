@@ -49,6 +49,29 @@ class ProfileController extends Controller
 
         $user->save();
 
+        // if ($user->picture_path === null && $request->file('file') != null) {
+        //
+        //     $extension = $request->file('file')->extension();
+        //     $fileName = $request->file('file')->getClientOriginalName();
+        //     $randomName = $this->generateRandomString() . '_img.' . $extension;
+        //     $result = $request->file('file')->storeAs('public/images', $randomName);
+        //
+        //     $user->update([
+        //         "picture_path" => "storage/images/" . $randomName
+        //     ]);
+        // }
+        // if ($user->picture_path != null && $request->file('file') != null) {
+        //     $file = str_replace('storage/images/', '', $user->picture_path);
+        //     $result = $request->file('file')->storeAs('public/images', $file);
+        // }
+        //
+        // $user->update([
+        //     "city" => $request->city,
+        //     "province" => $request->province,
+        // ]);
+        //
+        // $user->save();
+
         return response()->json([
             $user
         ], 201);
