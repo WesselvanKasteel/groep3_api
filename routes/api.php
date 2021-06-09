@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,18 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/me', [AuthController::class, 'me']);
 });
+
+Route::middleware('auth', function() {
+    Route::post('/update-user', [ProfileController::class, 'updateUser']);
+    Route::get('/get-user-data', [ProfileController::class, 'getUserData']);
+});
+
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
+    Route::get('/', [ProfileController::class, 'show']);
+    Route::put('/update', [ProfileController::class, 'update']);
+});
+
+// Route::group(['prefix' => 'user'], function() {
+//     Route::get('/{id}', [ProfileController::class, 'show']);
+//     Route::post('/{id}/update', [ProfileController::class, 'update']);
+// });
