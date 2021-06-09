@@ -29,6 +29,17 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('/me', [AuthController::class, 'me']);
 });
 
+Route::middleware('auth', function() {
+    Route::post('/update-user', [ProfileController::class, 'updateUser']);
+    Route::get('/get-user-data', [ProfileController::class, 'getUserData']);
+});
 
-Route::put('/update-user', [ProfileController::class, 'updateUser']);
-Route::get('/get-user-data', [ProfileController::class, 'getUserData']);
+Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
+    Route::get('/', [ProfileController::class, 'show']);
+    Route::put('/update', [ProfileController::class, 'update']);
+});
+
+// Route::group(['prefix' => 'user'], function() {
+//     Route::get('/{id}', [ProfileController::class, 'show']);
+//     Route::post('/{id}/update', [ProfileController::class, 'update']);
+// });
