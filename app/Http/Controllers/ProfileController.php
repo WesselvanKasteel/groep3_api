@@ -19,6 +19,23 @@ class ProfileController extends Controller
         return $randomString;
     }
 
+    public function update(Request $request)
+    {
+        $id = auth()->user()->id;
+        $user = User::where('id', $id)->first();
+
+        $user->update([
+            'city' => $request->city,
+            // 'country' => $request->country,
+        ]);
+
+        $user->save();
+
+        return response()->json([
+            'message' => 'User successfully updated!',
+        ], 200);
+    }    
+
     public function updateUser(Request $request){
 
         $user = User::where('id', '=', auth()->user()->id)->first();
@@ -77,7 +94,6 @@ class ProfileController extends Controller
 
     }
 
-
     public function getUserData() {
         $user = auth()->user();
         $dateOfBirth = date(auth()->user()->date_of_birth);
@@ -94,26 +110,20 @@ class ProfileController extends Controller
         ], 201);
     }
 
-    public function show($id)
-    {
-        $id = auth()->user()->id;
-        $user = User::where('id', $id)->first();
-        return response()->json($user, 200);
-    }
-
-    public function update(Request $request, $id)
+    public function show()
     {
         $id = auth()->user()->id;
         $user = User::where('id', $id)->first();
 
-        $user->update([
-            'country' => $request->country,
-        ]);
+        $dateOfBirth = date($user->date_of_birth);
+        $yearOfDateOfBirth = Carbon::createFromFormat('Y-m-d', $dateOfBirth);
+        $currentDate = Carbon::now();
 
-        $user->save();
+        $calculatedAge = $yearOfDateOfBirth->diff($currentDate)->y;
 
         return response()->json([
-            'message' => 'User successfully updated!',
+            'age' => $calculatedAge,
+            'user' => $user,
         ], 200);
     }
 }
