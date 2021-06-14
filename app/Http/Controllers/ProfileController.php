@@ -40,18 +40,19 @@ class ProfileController extends Controller
         $id = auth()->user()->id;
         $user = User::where('id', $id)->first();
 
-        $profilePicture = $request->file('profile_picture');
-        $profilePictureName = $profilePicture->getClientOriginalName();
-        
-        $profilePicture->storeAs('public/images', $profilePictureName);
+        // $encodedProfilePicture = base64_encode($request->file('picture'));
+        $pictureToBeUploaded = $request->file('picture');
+        $encodedProfilePicture = base64_encode(file_get_contents($pictureToBeUploaded));
 
+        // $result = $request->file('picture')->storeAs('public/images', $encodedProfilePicture);
         $user->update([
-            'picture_path' => 'storage/images' . $profilePictureName
+            'picture' => $encodedProfilePicture,
         ]);
         $user->save();
 
         return response()->json([
             'message' => 'profile picture succesfully updated!',
+            'encoded_picture' => $encodedProfilePicture,
         ]);
 
         // $user->update($updatedFields);

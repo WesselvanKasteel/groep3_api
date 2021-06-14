@@ -40,5 +40,5 @@ Route::group(['prefix' => 'auth'], function() {
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function() {
     Route::get('/', [ProfileController::class, 'show']);
     Route::put('/edit', [ProfileController::class, 'edit']);
-    Route::post('/upload-profile-picture', [ProfileController::class, 'uploadProfilePicture']);
+    Route::post('/edit/picture', [ProfileController::class, 'uploadProfilePicture']);
 });
