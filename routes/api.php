@@ -37,7 +37,8 @@ Route::group(['prefix' => 'auth'], function() {
 // Route::post('/update-user', [ProfileController::class, 'updateUser']);
 // Route::get('/get-user-data', [ProfileController::class, 'getUserData']);
 
-Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function() {
     Route::get('/', [ProfileController::class, 'show']);
-    Route::put('/update', [ProfileController::class, 'update']);
+    Route::put('/edit', [ProfileController::class, 'edit']);
+    Route::post('/upload-profile-picture', [ProfileController::class, 'uploadProfilePicture']);
 });

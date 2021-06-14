@@ -13,7 +13,7 @@ class UserProfileUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,22 @@ class UserProfileUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'address' => ['string'],
+            'city' => ['string'],
+            'province' => ['string'],
+            'country' => ['string'],
+        ];
+    }
+
+     /**
+     * Custom messages for validation.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+
         ];
     }
 }

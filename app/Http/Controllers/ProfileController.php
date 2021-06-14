@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserProfileUpdateRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,21 +20,65 @@ class ProfileController extends Controller
         return $randomString;
     }
 
-    public function update(Request $request)
+    public function edit(UserProfileUpdateRequest $request)
     {
         $id = auth()->user()->id;
         $user = User::where('id', $id)->first();
 
-        $user->update([
-            'city' => $request->city,
-            // 'country' => $request->country,
-        ]);
+        $fieldsToBeUpdated = $request->validated();
 
+        $user->update($fieldsToBeUpdated);
         $user->save();
 
         return response()->json([
-            'message' => 'User successfully updated!',
+            'message' => 'user succesfully updated',
         ], 200);
+    }
+
+    public function uploadProfilePicture(Request $request)
+    {
+        $id = auth()->user()->id;
+        $user = User::where('id', $id)->first();
+
+        $profilePicture = $request->file('profile_picture');
+        $profilePictureName = $profilePicture->getClientOriginalName();
+        
+        $profilePicture->storeAs('public/images', $profilePictureName);
+
+        $user->update([
+            'picture_path' => 'storage/images' . $profilePictureName
+        ]);
+        $user->save();
+
+        return response()->json([
+            'message' => 'profile picture succesfully updated!',
+        ]);
+
+        // $user->update($updatedFields);
+        // $user->save();
+        // if($user->picture_path === null)
+        // {
+        //     $extension = $request->file('file')->extension();
+        //     $fileName = $request->file('file')->getClientOriginalName();
+        //     $randomName = $this->generateRandomString() . '_img.' . $extension;
+        //     $result = $request->file('file')->storeAs('public/images', $randomName);
+
+        //     $user->update([
+        //         "picture_path" => "storage/images/" . $randomName
+        //     ]);
+        // } else {
+        //     $file = str_replace('storage/images/', '', $user->picture_path);
+        //     $result = $request->file('file')->storeAs('public/images', $file);
+        // }
+
+        // $updatedFields = $request->validated();
+
+        // $user->update($updatedFields);
+        
+
+        // return response()->json([
+        //     'message' => 'User successfully updated!',
+        // ], 200);
     }    
 
     public function updateUser(Request $request){
@@ -72,9 +117,9 @@ class ProfileController extends Controller
         //     $randomName = $this->generateRandomString() . '_img.' . $extension;
         //     $result = $request->file('file')->storeAs('public/images', $randomName);
         //
-        //     $user->update([
-        //         "picture_path" => "storage/images/" . $randomName
-        //     ]);
+            // $user->update([
+            //     "picture_path" => "storage/images/" . $randomName
+            // ]);
         // }
         // if ($user->picture_path != null && $request->file('file') != null) {
         //     $file = str_replace('storage/images/', '', $user->picture_path);
