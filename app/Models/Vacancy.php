@@ -11,17 +11,13 @@ class Vacancy extends Model
 {
     use HasFactory, Uuids;
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class);
+        return $this->hasOne(User::class);
     }
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'id' => 'string',
-    ];
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
