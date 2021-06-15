@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserProfileUpdateRequest;
 use App\Models\User;
+use App\Models\Job;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -25,13 +26,32 @@ class ProfileController extends Controller
         $id = auth()->user()->id;
         $user = User::where('id', $id)->first();
 
+        // $jobs = $request->previous_jobs;
+        // // $job = Job::create([
+        // //     'previous_jobs' => $jobs
+        // // ]);
+        // $acquired_jobs = [];
+        // foreach ($jobs as $job) {
+        //     $job = Job::create([
+        //         'previous_jobs' => $jobs
+        //     ]);
+        // }
+        // $job->save();
+        // // $user->jobs()->attach($jobs);
+        // $array = [];
+        // foreach ($jobs as $job) {
+        //     $existingJob = Job::where('previous_jobs', '=', $job->item)->first();
+        //     array_push($array, $existingJob);
+        // }
+
+
         $fieldsToBeUpdated = $request->validated();
 
         $user->update($fieldsToBeUpdated);
         $user->save();
-
         return response()->json([
             'message' => 'user succesfully updated',
+            // $job
         ], 200);
     }
 
@@ -75,12 +95,12 @@ class ProfileController extends Controller
         // $updatedFields = $request->validated();
 
         // $user->update($updatedFields);
-        
+
 
         // return response()->json([
         //     'message' => 'User successfully updated!',
         // ], 200);
-    }    
+    }
 
     public function updateUser(Request $request){
 

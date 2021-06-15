@@ -48,5 +48,22 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('users')->insert([
+            'id' => Uuid::generate(),
+            'first_name' => 'Matt',
+            'last_name' => 'Verdoes',
+            'country' => 'Nederland',
+            'province' => 'Zuid-Holland',
+            'city' => 'Katwijk aan zee',
+            'address' => 'Neptunus 49',
+            'email' => 'matt@mail.com',
+            'password' => bcrypt('bimpsert'),
+            'phone_number' => '0612345678',
+            'date_of_birth' => Carbon::create(2001, 12, 11, 0),
+            'external_cv' => 'https://www.linkedin.com/in/matt-verdoes-230728185/',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

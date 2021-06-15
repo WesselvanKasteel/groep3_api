@@ -26,6 +26,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Vacancy::class);
     }
 
+    public function jobs()
+    {
+        return $this->belongsToMany(Job::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -45,6 +50,7 @@ class User extends Authenticatable implements JWTSubject
         'date_of_birth',
         'picture',
         'password',
+        'external_cv',
     ];
 
     /**
