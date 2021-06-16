@@ -2,20 +2,23 @@
 
 namespace App\Models;
 
-use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Skill extends Model
 {
-    use HasFactory, Uuids;
+    use HasFactory;
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+    protected $fillable = [
+        'skill',
+    ];
+
     protected $casts = [
         'id' => 'string',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

@@ -40,11 +40,9 @@ class ProfileController extends Controller
         $id = auth()->user()->id;
         $user = User::where('id', $id)->first();
 
-        // $encodedProfilePicture = base64_encode($request->file('picture'));
         $pictureToBeUploaded = $request->file('picture');
         $encodedProfilePicture = base64_encode(file_get_contents($pictureToBeUploaded));
 
-        // $result = $request->file('picture')->storeAs('public/images', $encodedProfilePicture);
         $user->update([
             'picture' => $encodedProfilePicture,
         ]);
@@ -54,32 +52,6 @@ class ProfileController extends Controller
             'message' => 'profile picture succesfully updated!',
             'encoded_picture' => $encodedProfilePicture,
         ]);
-
-        // $user->update($updatedFields);
-        // $user->save();
-        // if($user->picture_path === null)
-        // {
-        //     $extension = $request->file('file')->extension();
-        //     $fileName = $request->file('file')->getClientOriginalName();
-        //     $randomName = $this->generateRandomString() . '_img.' . $extension;
-        //     $result = $request->file('file')->storeAs('public/images', $randomName);
-
-        //     $user->update([
-        //         "picture_path" => "storage/images/" . $randomName
-        //     ]);
-        // } else {
-        //     $file = str_replace('storage/images/', '', $user->picture_path);
-        //     $result = $request->file('file')->storeAs('public/images', $file);
-        // }
-
-        // $updatedFields = $request->validated();
-
-        // $user->update($updatedFields);
-        
-
-        // return response()->json([
-        //     'message' => 'User successfully updated!',
-        // ], 200);
     }    
 
     public function updateUser(Request $request){

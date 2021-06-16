@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserVacancyTable extends Migration
+class CreatePremiaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateUserVacancyTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_vacancy', function (Blueprint $table) {
+        Schema::create('premia', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->nullable()->constrained();
-            $table->foreignUuid('vacancy_id')->nullable()->constrained();
+            $table->boolean('is_authorized');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateUserVacancyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_vacancy');
+        Schema::dropIfExists('premia');
     }
 }
