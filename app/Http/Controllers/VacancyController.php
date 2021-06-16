@@ -10,7 +10,11 @@ class VacancyController extends Controller
     //
 
     public function index(){
-        return Vacancy::all();
+        // $skills = Vacancy::first()->skills;
+        // $vacancy = Vacancy::all();
+
+        // return $skills && $vacancy;
+        return Vacancy::with('skills')->get();
     }
 
 }
