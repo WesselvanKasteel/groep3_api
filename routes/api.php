@@ -29,5 +29,16 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('/me', [AuthController::class, 'me']);
 });
 
+// Route::middleware('auth', function() {
+//     Route::post('/update-user', [ProfileController::class, 'updateUser']);
+//     Route::get('/get-user-data', [ProfileController::class, 'getUserData']);
+// });
 
-Route::put('/update-user', [ProfileController::class, 'updateUser']);
+// Route::post('/update-user', [ProfileController::class, 'updateUser']);
+// Route::get('/get-user-data', [ProfileController::class, 'getUserData']);
+
+Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function() {
+    Route::get('/', [ProfileController::class, 'show']);
+    Route::put('/edit', [ProfileController::class, 'edit']);
+    Route::post('/edit/picture', [ProfileController::class, 'uploadProfilePicture']);
+});

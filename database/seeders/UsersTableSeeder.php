@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Uuid\Uuid;
@@ -26,7 +27,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'tim@mail.com',
             'password' => bcrypt('bimpsert'),
             'phone_number' => '06121212',
-            'date_of_birth' => now(),
+            'date_of_birth' => Carbon::create(1999, 7, 3, 0),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -43,7 +44,24 @@ class UsersTableSeeder extends Seeder
             'email' => 'wessel@mail.com',
             'password' => bcrypt('bimpsert'),
             'phone_number' => '0634343434',
-            'date_of_birth' => now(),
+            'date_of_birth' => Carbon::create(2001, 7, 31, 0),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('users')->insert([
+            'id' => Uuid::generate(),
+            'first_name' => 'Matt',
+            'last_name' => 'Verdoes',
+            'country' => 'Nederland',
+            'province' => 'Zuid-Holland',
+            'city' => 'Katwijk aan zee',
+            'address' => 'Neptunus 49',
+            'email' => 'matt@mail.com',
+            'password' => bcrypt('bimpsert'),
+            'phone_number' => '0612345678',
+            'date_of_birth' => Carbon::create(2001, 12, 11, 0),
+            'external_cv' => 'https://www.linkedin.com/in/matt-verdoes-230728185/',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

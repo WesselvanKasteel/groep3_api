@@ -39,7 +39,7 @@ class UserRegisterRequest extends FormRequest
     }
 
      /**
-     * Custom message for validation
+     * Custom messages for validation.
      *
      * @return array
      */
