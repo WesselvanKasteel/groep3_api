@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VacancyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -42,3 +43,5 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function() {
     Route::put('/edit', [ProfileController::class, 'edit']);
     Route::post('/edit/picture', [ProfileController::class, 'uploadProfilePicture']);
 });
+
+Route::get('/vacancies', [VacancyController::class, 'index']);
