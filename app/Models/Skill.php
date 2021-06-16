@@ -13,6 +13,10 @@ class Skill extends Model
         'skill',
     ];
 
+    protected $casts = [
+        'id' => 'string',
+    ];
+
     public function users()
     {
         return $this->hasMany(User::class);
