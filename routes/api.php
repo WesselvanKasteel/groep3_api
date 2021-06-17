@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Skill;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,4 +38,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function() {
     Route::post('/edit/picture', [ProfileController::class, 'uploadProfilePicture']);
 });
 
-Route::get('/skills', [SkillController::class, 'index']);
+Route::group(['prefix' => 'skills', 'middleware' => 'auth:api'], function() {
+    Route::get('/', [SkillController::class, 'index']);
+    Route::post('/store', [SkillController::class, 'store']);
+});
