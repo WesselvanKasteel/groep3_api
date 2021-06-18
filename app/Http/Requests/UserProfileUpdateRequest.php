@@ -29,7 +29,6 @@ class UserProfileUpdateRequest extends FormRequest
             'province' => ['string'],
             'country' => ['string'],
             'external_cv' => ['string'],
-            'jobs' => ['array'],
         ];
     }
 

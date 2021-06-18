@@ -18,7 +18,9 @@ class DatabaseSeeder extends Seeder
             JobsTableSeeder::class,
             UsersTableSeeder::class,
             RolesTableSeeder::class,
+            PremiaTableSeeder::class,
             VacanciesTableSeeder::class,
+            SkillsTableSeeder::class,
         ]);
     }
 }
