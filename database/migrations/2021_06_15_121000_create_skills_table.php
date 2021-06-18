@@ -15,7 +15,7 @@ class CreateSkillsTable extends Migration
     {
         Schema::create('skills', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('skill');
+            $table->string('skill')->unique();
             $table->timestamps();
         });
     }

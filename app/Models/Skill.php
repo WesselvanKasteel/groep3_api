@@ -2,24 +2,24 @@
 
 namespace App\Models;
 
+use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Skill extends Model
 {
-    use HasFactory;
+    use HasFactory, Uuids;
+
+    public $incrementing = false;
+    protected $keyType = 'string';    
 
     protected $fillable = [
         'skill',
     ];
 
-    protected $casts = [
-        'id' => 'string',
-    ];
-
     public function users()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function vacancies()

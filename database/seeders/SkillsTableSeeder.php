@@ -22,6 +22,8 @@ class SkillsTableSeeder extends Seeder
             DB::table('skills')->insert([
                 'id' => Uuid::generate(),
                 'skill' => $skill,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
