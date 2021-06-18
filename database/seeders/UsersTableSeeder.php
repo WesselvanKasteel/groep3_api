@@ -48,5 +48,20 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('users')->insert([
+            'id' => Uuid::generate(),
+            'company_name' => 'North Face',
+            'country' => 'Nederland',
+            'province' => 'Noord-Holland',
+            'city' => 'Amsterdam',
+            'address' => 'Camera Obscuralaan 107',
+            'email' => 'northface@mail.com',
+            'password' => bcrypt('bimpsert'),
+            'phone_number' => '0612345678',
+            'date_of_birth' => Carbon::create(1990, 1, 10, 0),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
