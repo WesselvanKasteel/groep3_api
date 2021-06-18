@@ -28,7 +28,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function vacancy()
     {
-        return $this->belongsTo(Vacancy::class);
+        return $this->belongsToMany(Vacancy::class);
     }
 
     public function vacancies()
