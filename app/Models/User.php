@@ -21,9 +21,24 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Role::class);
     }
 
+    public function premium()
+    {
+        return $this->hasOne(Premium::class);
+    }
+
+    public function vacancy()
+    {
+        return $this->belongsToMany(Vacancy::class);
+    }
+
     public function vacancies()
     {
-        return $this->hasMany(Vacancy::class);
+        return $this->belongsToMany(Vacancy::class);
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
     }
 
     /**
@@ -41,10 +56,11 @@ class User extends Authenticatable implements JWTSubject
         'city',
         'address',
         'email',
+        'password',
         'phone_number',
         'date_of_birth',
-        'picture_path',
-        'password',
+        'picture',
+        'external_cv',
     ];
 
     /**

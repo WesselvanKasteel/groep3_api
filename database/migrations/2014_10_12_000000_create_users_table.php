@@ -24,11 +24,12 @@ class CreateUsersTable extends Migration
             $table->string('city');
             $table->string('address');
             $table->string('email')->unique();
-            $table->string('phone_number')->unique();
+            $table->string('phone_number')->unique()->nullable();
             $table->date('date_of_birth')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('picture_path')->nullable();
+            $table->longText('picture')->nullable();
+            $table->string('external_cv')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

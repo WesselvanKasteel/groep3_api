@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserProfileUpdateRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -9,7 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-
     public function generateRandomString($length = 24) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -19,6 +19,58 @@ class ProfileController extends Controller
         }
         return $randomString;
     }
+
+    public function show()
+    {
+        $id = auth()->user()->id;
+        // $user = User::where('id', $id)->first();
+        $user = User::with('skills')->where('id', $id)->first();
+
+        $dateOfBirth = date($user->date_of_birth);
+        $yearOfDateOfBirth = Carbon::createFromFormat('Y-m-d', $dateOfBirth);
+        $currentDate = Carbon::now();
+
+        $calculatedAge = $yearOfDateOfBirth->diff($currentDate)->y;
+
+        return response()->json([
+            'age' => $calculatedAge,
+            'user' => $user,
+        ], 200);
+    }
+
+    public function edit(UserProfileUpdateRequest $request)
+    {
+        $id = auth()->user()->id;
+        $user = User::where('id', $id)->first();
+
+        $fieldsToBeUpdated = $request->validated();
+
+        $user->update($fieldsToBeUpdated);
+        $user->save();
+
+        return response()->json([
+            'message' => 'user succesfully updated',
+        ], 200);
+    }
+
+    public function uploadProfilePicture(Request $request)
+    {
+        $id = auth()->user()->id;
+        $user = User::where('id', $id)->first();
+
+        $pictureToBeUploaded = $request->file('picture');
+        $encodedProfilePicture = base64_encode(file_get_contents($pictureToBeUploaded));
+
+        $user->update([
+            'picture' => $encodedProfilePicture,
+        ]);
+        $user->save();
+
+        return response()->json([
+            'message' => 'profile picture succesfully updated!',
+            'encoded_picture' => $encodedProfilePicture,
+        ]);
+    }    
 
     public function updateUser(Request $request){
 
@@ -49,13 +101,35 @@ class ProfileController extends Controller
 
         $user->save();
 
+        // if ($user->picture_path === null && $request->file('file') != null) {
+        //
+        //     $extension = $request->file('file')->extension();
+        //     $fileName = $request->file('file')->getClientOriginalName();
+        //     $randomName = $this->generateRandomString() . '_img.' . $extension;
+        //     $result = $request->file('file')->storeAs('public/images', $randomName);
+        //
+            // $user->update([
+            //     "picture_path" => "storage/images/" . $randomName
+            // ]);
+        // }
+        // if ($user->picture_path != null && $request->file('file') != null) {
+        //     $file = str_replace('storage/images/', '', $user->picture_path);
+        //     $result = $request->file('file')->storeAs('public/images', $file);
+        // }
+        //
+        // $user->update([
+        //     "city" => $request->city,
+        //     "province" => $request->province,
+        // ]);
+        //
+        // $user->save();
+
         return response()->json([
             auth()->user()
             //$user
         ], 201);
 
     }
-
 
     public function getUserData() {
         $user = auth()->user();
@@ -72,5 +146,4 @@ class ProfileController extends Controller
             'user' => $user,
         ], 201);
     }
-
 }
