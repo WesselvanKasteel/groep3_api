@@ -20,7 +20,6 @@ class SkillController extends Controller
 
         $skillToBeAdded = $request->skill;
         $skill = Skill::create([
-            'id' => Uuid::generate(),
             'skill' => $skillToBeAdded,
         ]);
 

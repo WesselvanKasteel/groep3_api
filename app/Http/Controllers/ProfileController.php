@@ -20,6 +20,24 @@ class ProfileController extends Controller
         return $randomString;
     }
 
+    public function show()
+    {
+        $id = auth()->user()->id;
+        // $user = User::where('id', $id)->first();
+        $user = User::with('skills')->where('id', $id)->first();
+
+        $dateOfBirth = date($user->date_of_birth);
+        $yearOfDateOfBirth = Carbon::createFromFormat('Y-m-d', $dateOfBirth);
+        $currentDate = Carbon::now();
+
+        $calculatedAge = $yearOfDateOfBirth->diff($currentDate)->y;
+
+        return response()->json([
+            'age' => $calculatedAge,
+            'user' => $user,
+        ], 200);
+    }
+
     public function edit(UserProfileUpdateRequest $request)
     {
         $id = auth()->user()->id;
@@ -127,22 +145,5 @@ class ProfileController extends Controller
             'age' => $calculatedAge,
             'user' => $user,
         ], 201);
-    }
-
-    public function show()
-    {
-        $id = auth()->user()->id;
-        $user = User::where('id', $id)->first();
-
-        $dateOfBirth = date($user->date_of_birth);
-        $yearOfDateOfBirth = Carbon::createFromFormat('Y-m-d', $dateOfBirth);
-        $currentDate = Carbon::now();
-
-        $calculatedAge = $yearOfDateOfBirth->diff($currentDate)->y;
-
-        return response()->json([
-            'age' => $calculatedAge,
-            'user' => $user,
-        ], 200);
     }
 }
