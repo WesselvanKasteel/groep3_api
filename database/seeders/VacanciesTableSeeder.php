@@ -23,5 +23,14 @@ class VacanciesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        // DB::table('vacancies')->insert([
+        //     'id' => Uuid::generate(),
+        //     'title' => 'React1 Developer',
+        //     'description' => 'Wij zijn op zoek naar een skillvolle React Developer voor ons team.',
+        //     'deadline' => now(),
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ]);
     }
 }
