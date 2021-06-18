@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SkillController;
-use App\Http\Controllers\ProfileController;
 use App\Models\Skill;
 
 /*
@@ -41,7 +40,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function() {
 });
 
 Route::get('/vacancies', [VacancyController::class, 'index']);
-Route::get('/skills', [SkillController::class, 'index']);
+
 
 Route::group(['prefix' => 'skills', 'middleware' => 'auth:api'], function() {
     Route::get('/', [SkillController::class, 'index']);
