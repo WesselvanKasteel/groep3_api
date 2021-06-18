@@ -25,7 +25,6 @@ class UserRegisterRequest extends FormRequest
     {
         return [
             'first_name' => ['required', 'string'],
-            'prefix' => ['string'],
             'last_name' => ['required', 'string'],
             'country' => ['required', 'string'],
             'province' => ['required', 'string'],
@@ -39,7 +38,7 @@ class UserRegisterRequest extends FormRequest
     }
 
      /**
-     * Custom message for validation
+     * Custom messages for validation.
      *
      * @return array
      */
