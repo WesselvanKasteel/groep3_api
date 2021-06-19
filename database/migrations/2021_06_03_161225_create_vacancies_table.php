@@ -19,6 +19,7 @@ class CreateVacanciesTable extends Migration
             $table->string('title');
             $table->longText('description');
             $table->date('deadline')->nullable();
+            $table->uuid('code')->unique();
             $table->timestamps();
         });
     }

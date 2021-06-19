@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Uuids;
 use App\Models\Vacancy;
+use App\Models\Registration;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 
@@ -28,7 +29,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function vacancy()
     {
-        return $this->belongsTo(Vacancy::class);
+        return $this->belongsToMany(Vacancy::class);
     }
 
     public function vacancies()
@@ -39,6 +40,18 @@ class User extends Authenticatable implements JWTSubject
     public function skills()
     {
         return $this->belongsToMany(Skill::class);
+    }
+
+    
+    // Registration relation
+    public function registration()
+    {
+        return $this->belongsToMany(Registration::class);
+    }
+
+    public function assignRegistration(Registration $registration) 
+    {
+        return $this->registration()->save($registration);
     }
 
     /**

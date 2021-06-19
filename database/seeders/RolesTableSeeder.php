@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Uuid\Uuid;
 
+use App\Models\Role;
+
 class RolesTableSeeder extends Seeder
 {
     /**

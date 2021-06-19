@@ -30,6 +30,7 @@ class UserRegisterRequest extends FormRequest
             'province' => ['required', 'string'],
             'city' => ['required', 'string'],
             'address' => ['required', 'string'],
+            'date_of_birth' => ['date'],
             'email' => ['required', 'email'],
             'password' => ['required', 'string', 'min:6'],
             'phone_number' => ['required', 'string', 'min:6'],
