@@ -11,7 +11,7 @@ class Skill extends Model
     use HasFactory, Uuids;
 
     public $incrementing = false;
-    protected $keyType = 'string';    
+    protected $keyType = 'string';
 
     protected $fillable = [
         'skill',
