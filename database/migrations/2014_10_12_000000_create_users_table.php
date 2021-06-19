@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('company_name')->nullable();
             $table->string('first_name')->nullable();
             $table->string('prefix')->nullable();
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('country');
             $table->string('province');
             $table->string('city');

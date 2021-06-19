@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VacancyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SkillController;
-use App\Http\Controllers\ProfileController;
 use App\Models\Skill;
 
 /*
@@ -29,6 +30,8 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/me', [AuthController::class, 'me']);
+
+    Route::get('/check', [AuthController::class, 'check']);
 });
 
 
@@ -37,6 +40,10 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function() {
     Route::put('/edit', [ProfileController::class, 'edit']);
     Route::post('/edit/picture', [ProfileController::class, 'uploadProfilePicture']);
 });
+
+Route::get('/vacancies', [VacancyController::class, 'index']);
+Route::get('/vacancy', [VacancyController::class, 'getVacancyData']);
+
 
 Route::group(['prefix' => 'skills', 'middleware' => 'auth:api'], function() {
     Route::get('/', [SkillController::class, 'index']);
