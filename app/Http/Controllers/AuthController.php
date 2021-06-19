@@ -105,17 +105,21 @@ class AuthController extends Controller
         if (auth()->user() === null) {
             $auth = false;
             $role = null;
+
+            return response()->json([
+                'auth' => $auth,
+            ], 401);
         }
 
         else {
             $auth = true;
             $role = auth()->user()->with('role')->first();
-        }
 
-        return response()->json([
-            'auth' => $auth,
-            'role' => $role
-        ], 200);
+            return response()->json([
+                'auth' => $auth,
+                'role' => $role
+            ], 200);
+        }
     }
 
     /**
