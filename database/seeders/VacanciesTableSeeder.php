@@ -20,17 +20,29 @@ class VacanciesTableSeeder extends Seeder
             'title' => 'React Developer',
             'description' => 'Wij zijn op zoek naar een skillvolle React Developer voor ons team.',
             'deadline' => now(),
+            'code' => Uuid::generate(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        // DB::table('vacancies')->insert([
-        //     'id' => Uuid::generate(),
-        //     'title' => 'React1 Developer',
-        //     'description' => 'Wij zijn op zoek naar een skillvolle React Developer voor ons team.',
-        //     'deadline' => now(),
-        //     'created_at' => now(),
-        //     'updated_at' => now(),
-        // ]);
+        DB::table('vacancies')->insert([
+            'id' => Uuid::generate(),
+            'title' => 'Lead UI designer',
+            'description' => 'Wij zijn op zoek naar een getalenteerde leider voor ons team.',
+            'deadline' => now(),
+            'code' => Uuid::generate(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('vacancies')->insert([
+            'id' => Uuid::generate(),
+            'title' => 'Graphic designer',
+            'description' => '',
+            'code' => Uuid::generate(),
+            'deadline' => now(),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

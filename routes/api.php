@@ -40,6 +40,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function() {
 });
 
 Route::get('/vacancies', [VacancyController::class, 'index']);
+Route::get('/vacancy', [VacancyController::class, 'getVacancyData']);
 
 
 Route::group(['prefix' => 'skills', 'middleware' => 'auth:api'], function() {

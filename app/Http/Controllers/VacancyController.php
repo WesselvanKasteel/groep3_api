@@ -17,4 +17,15 @@ class VacancyController extends Controller
         return Vacancy::with('skills')->get()->all();
     }
 
+    public function getVacancyData(Request $request) {
+
+        // $vacancy = Vacancy::where('code', '=', $request->code)->first();
+
+        $vacancy = Vacancy::with('users')->with('skills')->where('code', '=', $request->code)->first();
+
+        return response()->json([
+            'vacancy' => $vacancy,
+        ], 200);
+    }
+
 }
