@@ -14,8 +14,8 @@ class CreateJobUserTable extends Migration
     public function up()
     {
         Schema::create('job_user', function (Blueprint $table) {
-            $table->foreignUuid('job_id')->constrained();
-            $table->foreignUuid('user_id')->constrained();
+            $table->foreignUuid('job_id')->nullable()->constrained();
+            $table->foreignUuid('user_id')->nullable()->constrained();
         });
     }
 

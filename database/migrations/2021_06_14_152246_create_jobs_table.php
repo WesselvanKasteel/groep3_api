@@ -15,7 +15,8 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->String('previous_jobs');
+            $table->string('job');
+            $table->timestamps();
         });
     }
 

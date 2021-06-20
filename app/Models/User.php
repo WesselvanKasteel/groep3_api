@@ -42,6 +42,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Skill::class);
     }
 
+    public function jobs()
+    {
+        return $this->belongsToMany(Job::class);
+    }
+
 
     // Registration relation
     public function registration()

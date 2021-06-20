@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             PremiaTableSeeder::class,
             VacanciesTableSeeder::class,
             SkillsTableSeeder::class,
+            JobsTableSeeder::class,
         ]);
     }
 }
