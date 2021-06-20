@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
+use App\Models\Role;
 use Webpatser\Uuid\Uuid;
 
 class AuthController extends Controller
@@ -18,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['register', 'login']]);
+        $this->middleware('auth:api', ['except' => ['register', 'login', 'check']]);
     }
 
     public function register(UserRegisterRequest $request)
@@ -34,6 +35,7 @@ class AuthController extends Controller
             'province' => $request->province,
             'city' => $request->city,
             'address' => $request->address,
+            'date_of_birth' => $request->date_of_birth,
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'phone_number' => $request->phone_number,
@@ -93,6 +95,31 @@ class AuthController extends Controller
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
+    }
+
+    public function check()
+    {
+        $auth;
+        $role;
+
+        if (auth()->user() === null) {
+            $auth = false;
+            $role = null;
+
+            return response()->json([
+                'auth' => $auth,
+            ], 401);
+        }
+
+        else {
+            $auth = true;
+            $role = auth()->user()->with('role')->first();
+
+            return response()->json([
+                'auth' => $auth,
+                'role' => $role
+            ], 200);
+        }
     }
 
     /**
