@@ -6,6 +6,8 @@ use App\Http\Controllers\VacancyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
+use App\Models\Job;
 use App\Http\Controllers\SkillController;
 use App\Models\Skill;
 
@@ -48,4 +50,9 @@ Route::get('/vacancy', [VacancyController::class, 'getVacancyData']);
 Route::group(['prefix' => 'skills', 'middleware' => 'auth:api'], function() {
     Route::get('/', [SkillController::class, 'index']);
     Route::post('/store', [SkillController::class, 'store']);
+});
+
+Route::group(['prefix' => 'jobs', 'middleware' => 'auth:api'], function() {
+    Route::get('/', [JobController::class, 'index']);
+    Route::post('/store', [JobController::class, 'store']);
 });
