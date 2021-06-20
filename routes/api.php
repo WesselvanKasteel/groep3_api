@@ -10,6 +10,8 @@ use App\Http\Controllers\JobController;
 use App\Models\Job;
 use App\Http\Controllers\SkillController;
 use App\Models\Skill;
+use App\Http\Controllers\EducationController;
+use App\Models\Education;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,4 +57,9 @@ Route::group(['prefix' => 'skills', 'middleware' => 'auth:api'], function() {
 Route::group(['prefix' => 'jobs', 'middleware' => 'auth:api'], function() {
     Route::get('/', [JobController::class, 'index']);
     Route::post('/store', [JobController::class, 'store']);
+});
+
+Route::group(['prefix' => 'education', 'middleware' => 'auth:api'], function() {
+    Route::get('/', [EducationController::class, 'index']);
+    Route::post('/store', [EducationController::class, 'store']);
 });

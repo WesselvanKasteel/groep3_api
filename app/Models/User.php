@@ -42,7 +42,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(Skill::class);
     }
 
-    public function educations()
+    public function education()
     {
         return $this->belongsToMany(Education::class);
     }

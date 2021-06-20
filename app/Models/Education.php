@@ -13,6 +13,11 @@ class Education extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
+    protected $fillable = [
+        'education',
+    ];
+
+
     public function users()
     {
         return $this->belongsToMany(User::class);
