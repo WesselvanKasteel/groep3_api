@@ -51,6 +51,7 @@ class ProfileController extends Controller
         $user->save();
         return response()->json([
             'message' => 'user succesfully updated',
+            $user
         ], 200);
     }
 
@@ -73,7 +74,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    
+
     public function getUsersData(){
         return User::with('skills')->get()->all();
     }
@@ -153,4 +154,3 @@ class ProfileController extends Controller
     //         'user' => $user,
     //     ], 201);
     // }
-

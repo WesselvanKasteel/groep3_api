@@ -28,6 +28,7 @@ class UserProfileUpdateRequest extends FormRequest
             'city' => ['string'],
             'province' => ['string'],
             'country' => ['string'],
+            'phone_number' => ['string'],
             'external_cv' => ['string'],
         ];
     }
