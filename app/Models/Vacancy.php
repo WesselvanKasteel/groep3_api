@@ -45,24 +45,24 @@ class Vacancy extends Model
 
 
     // Registration relation
-    public function registration()
+    public function registrations()
     {
         return $this->belongsToMany(Registration::class);
     }
 
     public function assignRegistration(Registration $registration) 
     {
-        return $this->registration()->save($registration);
+        return $this->registrations()->save($registration);
     }
 
     // Topic relation
-    public function topic()
+    public function topics()
     {
         return $this->belongsToMany(Topic::class);
     }
 
     public function assignTopic(Topic $topic) 
     {
-        return $this->topic()->save($topic);
+        return $this->topics()->save($topic);
     }
 }

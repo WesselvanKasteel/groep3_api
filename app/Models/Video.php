@@ -14,6 +14,9 @@ class Video extends Model
 {
     use HasFactory, Uuids;
 
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
         'path',
         'size',
@@ -21,31 +24,31 @@ class Video extends Model
     ];
 
     protected $hidden = [
-        'id',
+        // 'id',
         'updated_at',
         'created_at',
     ];
 
 
     // Topic relation
-    public function topic()
+    public function topics()
     {
         return $this->belongsToMany(Topic::class);
     }
 
     public function assignTopic(Topic $topic) 
     {
-        return $this->topic()->save($topic);
+        return $this->topics()->save($topic);
     }
 
     // User relation
-    public function user()
+    public function users()
     {
         return $this->belongsToMany(User::class);
     }
 
     public function assignUser(User $user) 
     {
-        return $this->user()->save($user);
+        return $this->users()->save($user);
     }
 }

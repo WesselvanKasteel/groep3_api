@@ -55,25 +55,25 @@ class User extends Authenticatable implements JWTSubject
 
 
     // Registration relation
-    public function registration()
+    public function registrations()
     {
         return $this->belongsToMany(Registration::class);
     }
 
     public function assignRegistration(Registration $registration)
     {
-        return $this->registration()->save($registration);
+        return $this->registrations()->save($registration);
     }
 
     // Video relation
-    public function video()
+    public function videos()
     {
         return $this->belongsToMany(Video::class);
     }
 
     public function assignVideo(Video $video) 
     {
-        return $this->video()->save($video);
+        return $this->videos()->save($video);
     }
 
     /**

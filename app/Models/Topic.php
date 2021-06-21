@@ -32,24 +32,24 @@ class Topic extends Model
 
 
     // Vacancy relation
-    public function vacancy()
+    public function vacancies()
     {
         return $this->belongsToMany(Vacancy::class);
     }
 
     public function assignVacancy(Vacancy $vacancy) 
     {
-        return $this->vacancy()->save($vacancy);
+        return $this->vacancies()->save($vacancy);
     }
 
     // Video relation
-    public function video()
+    public function videos()
     {
         return $this->belongsToMany(Video::class);
     }
 
     public function assignVideo(Video $video) 
     {
-        return $this->video()->save($video);
+        return $this->videos()->save($video);
     }
 }

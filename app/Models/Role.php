@@ -18,4 +18,15 @@ class Role extends Model
     protected $casts = [
         'id' => 'string',
     ];
+
+    // User relation
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function assignUser(User $user) 
+    {
+        return $this->users()->save($user);
+    }
 }

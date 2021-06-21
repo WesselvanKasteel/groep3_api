@@ -26,7 +26,15 @@ class ProfileController extends Controller
     {
         $id = auth()->user()->id;
         // $user = User::where('id', $id)->first();
-        $user = User::with('skills', 'jobs', 'education')->where('id', $id)->first();
+        $user = User::with('skills', 'jobs', 'education', 'videos')->where('id', $id)->first();
+
+        $user_video = null;
+
+        foreach ($user->videos as $video) {;
+            if (str_contains($video->path, 'intruduction')) {
+                $user_video = $video;
+            }
+        }
 
         $dateOfBirth = date($user->date_of_birth);
         $yearOfDateOfBirth = Carbon::createFromFormat('Y-m-d', $dateOfBirth);
@@ -36,6 +44,7 @@ class ProfileController extends Controller
 
         return response()->json([
             'age' => $calculatedAge,
+            'video' => $user_video,
             'user' => $user,
         ], 200);
     }
