@@ -146,4 +146,8 @@ class ProfileController extends Controller
             'user' => $user,
         ], 201);
     }
+
+    public function getUsersData(){
+        return User::with('skills')->get()->all();
+    }
 }
