@@ -72,6 +72,12 @@ class ProfileController extends Controller
         ]);
     }
 
+    
+    public function getUsersData(){
+        return User::with('skills')->get()->all();
+    }
+}
+
     // public function updateUser(Request $request){
     //
     //     $user = User::where('id', '=', auth()->user()->id)->first();
@@ -147,4 +153,3 @@ class ProfileController extends Controller
     //     ], 201);
     // }
 
-}
