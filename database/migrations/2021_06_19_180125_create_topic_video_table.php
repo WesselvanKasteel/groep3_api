@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJobsTable extends Migration
+class CreateTopicVideoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateJobsTable extends Migration
      */
     public function up()
     {
-        Schema::create('jobs', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('job');
-            $table->timestamps();
+        Schema::create('topic_video', function (Blueprint $table) {
+            $table->foreignUuid('topic_id')->nullable()->constrained();
+            $table->foreignUuid('video_id')->nullable()->constrained();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateJobsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('topic_video');
     }
 }

@@ -15,9 +15,16 @@ class JobsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('jobs')->insert([
-            'id' => Uuid::generate(),
-            'previous_jobs' => 'fffeg',
-        ]);
+        $jobs = ['Vakkenvuller', 'Postbode', 'Administratief medewerker'];
+
+        foreach($jobs as $job)
+        {
+            DB::table('jobs')->insert([
+                'id' => Uuid::generate(),
+                'job' => $job,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

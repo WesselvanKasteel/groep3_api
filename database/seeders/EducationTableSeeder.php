@@ -2,14 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Uuid\Uuid;
 
-use App\Models\Role;
-
-class RolesTableSeeder extends Seeder
+class EducationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,13 +15,15 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-        $roles = ['employer', 'unemployed'];
+        $educations = ['HAVO', 'HBO'];
 
-        foreach($roles as $role)
+        foreach($educations as $education)
         {
-            DB::table('roles')->insert([
+            DB::table('education')->insert([
                 'id' => Uuid::generate(),
-                'role' => $role,
+                'education' => $education,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]);
         }
     }
