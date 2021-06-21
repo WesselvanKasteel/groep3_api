@@ -81,5 +81,22 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        DB::table('users')->insert([
+            'id' => Uuid::generate(),
+            'first_name' => 'Felipe',
+            'last_name' => 'Noordegraaf',
+            'country' => 'Nederland',
+            'province' => 'Zuid-Holland',
+            'city' => 'Den Haag',
+            'address' => 'Groenland 4',
+            'email' => 'felep@mail.com',
+            'password' => bcrypt('bimpsert'),
+            'phone_number' => '0648365532',
+            'date_of_birth' => Carbon::create(1999, 6, 8, 0),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+
     }
 }
