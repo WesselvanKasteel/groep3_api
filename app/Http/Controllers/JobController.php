@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
-use Webpatser\Uuid\Uuid;
 
 class JobController extends Controller
 {
@@ -22,12 +21,27 @@ class JobController extends Controller
             'job' => $jobsToBeAdded,
         ]);
 
-        $newJob->users()->save($user);
+        $newJob->users()->attach($user);
         $newJob->save();
 
         return response()->json([
             'message' => 'Succesfully stored jobs',
             'jobs' => $jobsToBeAdded
         ], 200);
+    }
+
+    public function destroy(Request $request)
+    {
+        $user = auth()->user();
+        $jobsToBeRemoved = $request->job;
+
+        $job = new Job();
+        $job->users()->detach($user);
+        $job->delete($jobsToBeRemoved);
+        $job->save();
+
+        return response()->json([
+            'message' => 'Succesfully deleted job',
+        ]);
     }
 }
