@@ -38,12 +38,6 @@ class Vacancy extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function skills()
-    {
-        return $this->belongsToMany(Skill::class);
-    }
-
-
     // Registration relation
     public function registrations()
     {
@@ -64,5 +58,16 @@ class Vacancy extends Model
     public function assignTopic(Topic $topic) 
     {
         return $this->topics()->save($topic);
+    }
+
+    // Skill relation
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
+    }
+
+    public function assignSkill(Skill $skill) 
+    {
+        return $this->skills()->save($skill);
     }
 }

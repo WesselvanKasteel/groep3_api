@@ -6,6 +6,9 @@ use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Vacancy;
+use App\Models\Skill;
+
 class VacanciesTableSeeder extends Seeder
 {
     /**
@@ -25,6 +28,14 @@ class VacanciesTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        $vacancy = Vacancy::get()->last();
+        $skills = ['html', 'css'];
+        foreach ($skills as $skill) {
+            $skill = Skill::where('skill', '=', $skill)->first();
+            $vacancy->assignSkill($skill);
+        }
+
+
         DB::table('vacancies')->insert([
             'id' => Uuid::generate(),
             'title' => 'Lead UI designer',
@@ -35,6 +46,13 @@ class VacanciesTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        $vacancy = Vacancy::get()->last();
+        $skills = ['javascript', 'react', 'vue'];
+        foreach ($skills as $skill) {
+            $skill = Skill::where('skill', '=', $skill)->first();
+            $vacancy->assignSkill($skill);
+        }
+
         DB::table('vacancies')->insert([
             'id' => Uuid::generate(),
             'title' => 'Graphic designer',
@@ -44,5 +62,13 @@ class VacanciesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        $vacancy = Vacancy::get()->last();
+        $skills = ['php', 'laravel'];
+        foreach ($skills as $skill) {
+            $skill = Skill::where('skill', '=', $skill)->first();
+            $vacancy->assignSkill($skill);
+        }
+
     }
 }

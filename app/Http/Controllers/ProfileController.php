@@ -28,7 +28,7 @@ class ProfileController extends Controller
         // $user = User::where('id', $id)->first();
         $user = User::with('skills', 'jobs', 'education', 'videos')->where('id', $id)->first();
 
-        $user_video = null;
+        $user_video = false;
 
         foreach ($user->videos as $video) {;
             if (str_contains($video->path, 'intruduction')) {
