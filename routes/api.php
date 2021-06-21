@@ -3,10 +3,13 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VacancyController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\VideoController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SkillController;
+
 use App\Models\Skill;
 
 /*
@@ -41,8 +44,12 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function() {
     Route::post('/edit/picture', [ProfileController::class, 'uploadProfilePicture']);
 });
 
-Route::get('/vacancies', [VacancyController::class, 'index']);
-Route::get('/vacancy', [VacancyController::class, 'getVacancyData']);
+Route::group(['prefix' => 'vacancy', 'middleware' => 'auth:api'], function() {
+    Route::get('/vacancies', [VacancyController::class, 'index']);
+    Route::get('/vacancy', [VacancyController::class, 'getVacancyData']);
+
+    Route::post('/store', [VideoController::class, 'store']);
+});
 
 
 Route::group(['prefix' => 'skills', 'middleware' => 'auth:api'], function() {

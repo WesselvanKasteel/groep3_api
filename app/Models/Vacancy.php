@@ -44,7 +44,7 @@ class Vacancy extends Model
     }
 
 
-    // Topic relation
+    // Registration relation
     public function registration()
     {
         return $this->belongsToMany(Registration::class);

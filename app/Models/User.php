@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Uuids;
 use App\Models\Vacancy;
 use App\Models\Registration;
+use App\Models\Video;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 
@@ -52,6 +53,17 @@ class User extends Authenticatable implements JWTSubject
     public function assignRegistration(Registration $registration) 
     {
         return $this->registration()->save($registration);
+    }
+
+    // Video relation
+    public function video()
+    {
+        return $this->belongsToMany(Video::class);
+    }
+
+    public function assignVideo(Video $video) 
+    {
+        return $this->video()->save($video);
     }
 
     /**

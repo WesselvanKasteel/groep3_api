@@ -2,31 +2,28 @@
 
 namespace App\Models;
 
+use App\Traits\Uuids;
+
 use App\Models\Topic;
+use App\Models\User;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
-    use HasFactory;
+    use HasFactory, Uuids;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'name',
+        'path',
+        'size',
+        'duration',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'id',
+        'updated_at',
+        'created_at',
     ];
 
 
@@ -39,5 +36,16 @@ class Video extends Model
     public function assignTopic(Topic $topic) 
     {
         return $this->topic()->save($topic);
+    }
+
+    // User relation
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function assignUser(User $user) 
+    {
+        return $this->user()->save($user);
     }
 }
