@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserProfileUpdateRequest;
 use App\Models\User;
 use App\Models\Job;
+use App\Models\Education;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -25,7 +26,7 @@ class ProfileController extends Controller
     {
         $id = auth()->user()->id;
         // $user = User::where('id', $id)->first();
-        $user = User::with('skills', 'jobs')->where('id', $id)->first();
+        $user = User::with('skills', 'jobs', 'education')->where('id', $id)->first();
 
         $dateOfBirth = date($user->date_of_birth);
         $yearOfDateOfBirth = Carbon::createFromFormat('Y-m-d', $dateOfBirth);
