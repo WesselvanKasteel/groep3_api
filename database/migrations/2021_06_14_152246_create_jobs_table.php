@@ -15,7 +15,7 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('job');
+            $table->string('job')->onDelete('cascade');
             $table->timestamps();
         });
     }

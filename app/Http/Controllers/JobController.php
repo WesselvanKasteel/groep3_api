@@ -29,19 +29,4 @@ class JobController extends Controller
             'jobs' => $jobsToBeAdded
         ], 200);
     }
-
-    public function destroy(Request $request)
-    {
-        $user = auth()->user();
-        $jobsToBeRemoved = $request->job;
-
-        $job = new Job();
-        $job->users()->detach($user);
-        $job->delete($jobsToBeRemoved);
-        $job->save();
-
-        return response()->json([
-            'message' => 'Succesfully deleted job',
-        ]);
-    }
 }

@@ -55,13 +55,14 @@ Route::group(['prefix' => 'skills', 'middleware' => 'auth:api'], function() {
     Route::post('/store', [SkillController::class, 'store']);
 });
 
-Route::group(['prefix' => 'jobs', 'middleware' => 'auth'], function() {
+Route::group(['prefix' => 'jobs', 'middleware' => 'auth:api'], function() {
     Route::get('/', [JobController::class, 'index']);
     Route::post('/store', [JobController::class, 'store']);
-    Route::delete('/destroy', [JobController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'education', 'middleware' => 'auth:api'], function() {
     Route::get('/', [EducationController::class, 'index']);
     Route::post('/store', [EducationController::class, 'store']);
 });
+
+Route::delete('/destroy', [JobController::class, 'destroy']);

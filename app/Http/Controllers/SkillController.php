@@ -19,13 +19,6 @@ class SkillController extends Controller
         $user = auth()->user();
         $skillsToBeAdded = $request->skill;
 
-        // $newSkill = null;
-
-        // foreach($skillsToBeAdded as $skill) {
-        //     $newSkill = Skill::create([
-        //         'skill' => $skill,
-        //     ]);
-        // }
         $newSkill = Skill::create([
             'skill' => $skillsToBeAdded,
         ]);
