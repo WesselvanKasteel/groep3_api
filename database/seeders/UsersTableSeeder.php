@@ -137,7 +137,7 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        $user = User::where('phone_number', '=', '0687654621')->first();
+        $user = User::where('phone_number', '=', '0648365532')->first();
         $role = Role::where('role', '=', 'unemployed')->first();
         $user->assignRole($role);
 
