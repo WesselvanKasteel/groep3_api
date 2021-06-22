@@ -14,7 +14,7 @@ class VacancyController extends Controller
         // $vacancy = Vacancy::all();
 
         // return $skills && $vacancy;
-        return Vacancy::with('skills')->get()->all();
+        return Vacancy::with('skills', 'users')->get()->all();
     }
 
     public function getVacancyData(Request $request) {

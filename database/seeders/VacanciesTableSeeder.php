@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Vacancy;
 use App\Models\Skill;
+use App\Models\User;
 
 class VacanciesTableSeeder extends Seeder
 {
@@ -29,11 +30,13 @@ class VacanciesTableSeeder extends Seeder
         ]);
 
         $vacancy = Vacancy::get()->last();
-        $skills = ['html', 'css'];
+        $skills = ['html', 'css', 'react'];
         foreach ($skills as $skill) {
             $skill = Skill::where('skill', '=', $skill)->first();
             $vacancy->assignSkill($skill);
         }
+        $user = User::where('phone_number', '=', '0612345678')->first();
+        $vacancy->assignUser($user);
 
 
         DB::table('vacancies')->insert([
@@ -52,10 +55,12 @@ class VacanciesTableSeeder extends Seeder
             $skill = Skill::where('skill', '=', $skill)->first();
             $vacancy->assignSkill($skill);
         }
+        $user = User::where('phone_number', '=', '0616345338')->first();
+        $vacancy->assignUser($user);
 
         DB::table('vacancies')->insert([
             'id' => Uuid::generate(),
-            'title' => 'Graphic designer',
+            'title' => 'Back-end developer',
             'description' => '',
             'code' => Uuid::generate(),
             'deadline' => now(),
@@ -69,6 +74,8 @@ class VacanciesTableSeeder extends Seeder
             $skill = Skill::where('skill', '=', $skill)->first();
             $vacancy->assignSkill($skill);
         }
+        $user = User::where('phone_number', '=', '0616345338')->first();
+        $vacancy->assignUser($user);
 
     }
 }
