@@ -28,41 +28,52 @@ class Vacancy extends Model
         'updated_at'
     ];
 
-    public function user()
-    {
-        return $this->hasOne(User::class);
-    }
+    // public function user()
+    // {
+    //     return $this->hasOne(User::class);
+    // }
 
+    // User relation
     public function users()
     {
         return $this->belongsToMany(User::class);
     }
 
-    public function skills()
+    public function assignUser(User $user) 
     {
-        return $this->belongsToMany(Skill::class);
+        return $this->users()->save($user);
     }
 
-
-    // Topic relation
-    public function registration()
+    // Registration relation
+    public function registrations()
     {
         return $this->belongsToMany(Registration::class);
     }
 
     public function assignRegistration(Registration $registration) 
     {
-        return $this->registration()->save($registration);
+        return $this->registrations()->save($registration);
     }
 
     // Topic relation
-    public function topic()
+    public function topics()
     {
         return $this->belongsToMany(Topic::class);
     }
 
     public function assignTopic(Topic $topic) 
     {
-        return $this->topic()->save($topic);
+        return $this->topics()->save($topic);
+    }
+
+    // Skill relation
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
+    }
+
+    public function assignSkill(Skill $skill) 
+    {
+        return $this->skills()->save($skill);
     }
 }

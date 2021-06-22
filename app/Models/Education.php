@@ -6,7 +6,7 @@ use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Skill extends Model
+class Education extends Model
 {
     use HasFactory, Uuids;
 
@@ -14,23 +14,12 @@ class Skill extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'skill',
+        'education',
     ];
+
 
     public function users()
     {
         return $this->belongsToMany(User::class);
     }
-
-    // Vacancy relation
-    public function vacancies()
-    {
-        return $this->belongsToMany(Vacancy::class);
-    }
-
-    public function assignVacancy(Vacancy $vacancy) 
-    {
-        return $this->vacancies()->save($vacancy);
-    }
-
 }

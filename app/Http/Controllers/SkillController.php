@@ -21,23 +21,25 @@ class SkillController extends Controller
 
     public function store(Request $request)
     {
+        $user = auth()->user();
         $skillsToBeAdded = $request->skill;
 
-        $newSkill = null;
+        // $newSkill = null;
 
-        foreach($skillsToBeAdded as $skill) {
-            $newSkill = Skill::create([
-                'id' => Uuid::generate(),
-                'skill' => $skill,
-            ]);
-        }
+        // foreach($skillsToBeAdded as $skill) {
+        //     $newSkill = Skill::create([
+        //         'skill' => $skill,
+        //     ]);
+        // }
+        $newSkill = Skill::create([
+            'skill' => $skillsToBeAdded,
+        ]);
 
-        $user = auth()->user();
-        
         $newSkill->users()->save($user);
         $newSkill->save();
         
         return response()->json([
+            'message' => 'Succesfully stored skills',
             'skills' => $skillsToBeAdded
         ], 200);
     }

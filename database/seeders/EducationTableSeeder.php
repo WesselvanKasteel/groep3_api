@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Uuid\Uuid;
 
-class SkillsTableSeeder extends Seeder
+class EducationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,18 +15,16 @@ class SkillsTableSeeder extends Seeder
      */
     public function run()
     {
-        $skills = ['html', 'css', 'javascript', 'react', 'vue', 'php', 'laravel'];
+        $educations = ['HAVO', 'HBO'];
 
-        foreach($skills as $skill)
+        foreach($educations as $education)
         {
-            DB::table('skills')->insert([
+            DB::table('education')->insert([
                 'id' => Uuid::generate(),
-                'skill' => $skill,
+                'education' => $education,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
-
-
     }
 }

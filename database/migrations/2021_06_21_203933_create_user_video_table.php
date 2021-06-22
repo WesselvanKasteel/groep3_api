@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSkillsTable extends Migration
+class CreateUserVideoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateSkillsTable extends Migration
      */
     public function up()
     {
-        Schema::create('skills', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('skill');
-            $table->timestamps();
+        Schema::create('user_video', function (Blueprint $table) {
+            $table->foreignUuid('user_id')->nullable()->constrained();
+            $table->foreignUuid('video_id')->nullable()->constrained();
         });
     }
 
@@ -27,6 +26,6 @@ class CreateSkillsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('user_video');
     }
 }
