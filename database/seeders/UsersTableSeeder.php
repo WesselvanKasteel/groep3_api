@@ -7,6 +7,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Uuid\Uuid;
 
+use App\Models\Role;
+use App\Models\User;
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -32,6 +35,10 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        $user = User::where('phone_number', '=', '06121212')->first();
+        $role = Role::where('role', '=', 'unemployed')->first();
+        $user->assignRole($role);
+
         DB::table('users')->insert([
             'id' => Uuid::generate(),
             'first_name' => 'Wessel',
@@ -48,6 +55,10 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        $user = User::where('phone_number', '=', '0634343434')->first();
+        $role = Role::where('role', '=', 'unemployed')->first();
+        $user->assignRole($role);
 
         DB::table('users')->insert([
             'id' => Uuid::generate(),
@@ -66,6 +77,10 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        $user = User::where('phone_number', '=', '0687654321')->first();
+        $role = Role::where('role', '=', 'unemployed')->first();
+        $user->assignRole($role);
+
         DB::table('users')->insert([
             'id' => Uuid::generate(),
             'company_name' => 'North Face',
@@ -80,6 +95,10 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        $user = User::where('phone_number', '=', '0687654321')->first();
+        $role = Role::where('role', '=', 'employer')->first();
+        $user->assignRole($role);
 
     }
 }

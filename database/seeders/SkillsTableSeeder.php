@@ -15,7 +15,7 @@ class SkillsTableSeeder extends Seeder
      */
     public function run()
     {
-        $skills = ['HTML', 'CSS', 'JS', 'React', 'Vue'];
+        $skills = ['html', 'css', 'javascript', 'react', 'vue', 'php', 'laravel'];
 
         foreach($skills as $skill)
         {
@@ -26,5 +26,7 @@ class SkillsTableSeeder extends Seeder
                 'updated_at' => now(),
             ]);
         }
+
+
     }
 }
