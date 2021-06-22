@@ -26,6 +26,8 @@ class RolesTableSeeder extends Seeder
                 'id' => Uuid::generate(),
                 'role' => $role,
             ]);
+
+            
         }
     }
 }

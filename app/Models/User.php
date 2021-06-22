@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Traits\Uuids;
 use App\Models\Vacancy;
 use App\Models\Registration;
+use App\Models\Video;
+use App\Models\Role;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 
@@ -17,10 +19,10 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable, Uuids;
 
-    public function role()
-    {
-        return $this->hasOne(Role::class);
-    }
+    // public function role()
+    // {
+    //     return $this->hasOne(Role::class);
+    // }
 
     public function premium()
     {
@@ -54,14 +56,36 @@ class User extends Authenticatable implements JWTSubject
 
 
     // Registration relation
-    public function registration()
+    public function registrations()
     {
         return $this->belongsToMany(Registration::class);
     }
 
     public function assignRegistration(Registration $registration)
     {
-        return $this->registration()->save($registration);
+        return $this->registrations()->save($registration);
+    }
+
+    // Video relation
+    public function videos()
+    {
+        return $this->belongsToMany(Video::class);
+    }
+
+    public function assignVideo(Video $video) 
+    {
+        return $this->videos()->save($video);
+    }
+
+    // Role relation
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function assignRole(Role $role) 
+    {
+        return $this->roles()->save($role);
     }
 
     /**
