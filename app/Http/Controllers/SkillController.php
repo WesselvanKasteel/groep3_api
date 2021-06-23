@@ -10,7 +10,7 @@ class SkillController extends Controller
 {
     public function getAllSkills()
     {
-        return Skill::get()->all();
+        return Skill::all();
     }
 
     public function index()

@@ -60,7 +60,6 @@ Route::group(['prefix' => 'skill'], function() {
     Route::get('/skills', [SkillController::class, 'getAllSkills']);
 });
 
-
 Route::group(['prefix' => 'vacancy', 'middleware' => 'auth:api'], function() {
     Route::get('/vacancy', [VacancyController::class, 'getVacancyData']);
     Route::post('/store', [VideoController::class, 'store']);
