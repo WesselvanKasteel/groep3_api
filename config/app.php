@@ -166,8 +166,6 @@ return [
          * Package Service Providers...
          */
 
-        Owenoj\LaravelGetId3\GetId3ServiceProvider::class, 
-
         /*
          * Application Service Providers...
          */

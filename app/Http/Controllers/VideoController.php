@@ -31,14 +31,9 @@ class VideoController extends Controller
             $db_video->delete();
         }
 
-        // analyse video
-        $track = new GetId3(request()->file('file'));
-        $size = round($request->file('file')->getSize() / (1024*1024), 1);
-
         // saving video entry in db 
         $video = new Video;
         $video->path = "http://127.0.0.1:8000/storage/videos/" . $file_name . $file_code . '.webm';
-        $video->size = $size;
         $video->save();
 
         return response()->json([
@@ -75,15 +70,10 @@ class VideoController extends Controller
         $file_code = Uuid::generate();
         $video_path = $request->file('file')->storeAs('public/videos', 'intruduction_' . $file_code . '.webm');
 
-        // analyse video 
-        $track = new GetId3(request()->file('file'));
-        $size = round($request->file('file')->getSize() / (1024*1024), 1);
-
         // saving video entry in db 
         $video = Video::create([
             'id' => Uuid::generate(),
             'path' => "http://127.0.0.1:8000/storage/videos/" . 'intruduction_' . $file_code . '.webm',
-            'size' => $size,
         ]);
 
         $user->assignVideo($video);
