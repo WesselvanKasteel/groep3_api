@@ -123,10 +123,12 @@ class AuthController extends Controller
         
         $user = auth()->user();
         $role = $user->roles()->first()->role;
+        $auth = true;
         
         return response()->json([
             'user' => $user,
             'role' => $role,
+            'auth' => $auth,
         ]);
     }
 
