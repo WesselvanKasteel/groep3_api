@@ -37,7 +37,7 @@ Route::group(['prefix' => 'auth'], function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::post('/me', [AuthController::class, 'me']);
-    Route::get('/check', [AuthController::class, 'check']);
+    Route::get('/check-user-role', [AuthController::class, 'checkUserRole']);
 });
 
 
@@ -73,11 +73,10 @@ Route::group(['prefix' => 'skills', 'middleware' => 'auth:api'], function() {
 Route::group(['prefix' => 'jobs', 'middleware' => 'auth:api'], function() {
     Route::get('/', [JobController::class, 'index']);
     Route::post('/store', [JobController::class, 'store']);
+    Route::delete('/destroy', [JobController::class, 'destroy']);
 });
 
 Route::group(['prefix' => 'education', 'middleware' => 'auth:api'], function() {
     Route::get('/', [EducationController::class, 'index']);
     Route::post('/store', [EducationController::class, 'store']);
 });
-
-Route::delete('/destroy', [JobController::class, 'destroy']);
