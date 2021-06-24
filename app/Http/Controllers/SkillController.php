@@ -8,6 +8,11 @@ use Webpatser\Uuid\Uuid;
 
 class SkillController extends Controller
 {
+    public function getAllSkills()
+    {
+        return Skill::all();
+    }
+
     public function index()
     {
         $users = Skill::with('users')->get();
