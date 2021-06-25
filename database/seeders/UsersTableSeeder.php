@@ -16,70 +16,29 @@ class UsersTableSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
-     */
+    */
     public function run()
     {
         DB::table('users')->insert([
             'id' => Uuid::generate(),
-            'first_name' => 'Tim',
-            'last_name' => 'Esveldt',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
             'country' => 'Nederland',
             'province' => 'Zuid-Holland',
             'city' => 'Leiden',
-            'address' => 'Luisterlaan 13',
-            'email' => 'tim@mail.com',
+            'address' => 'Le Carrefour Dellaertweg 7F',
+            'email' => 'johndoe@mail.com',
             'password' => bcrypt('123456'),
-            'phone_number' => '06121212',
+            'phone_number' => '06123456',
             'date_of_birth' => Carbon::create(1999, 7, 3, 0),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
-        $user = User::where('phone_number', '=', '06121212')->first();
+        $user = User::where('phone_number', '=', '06123456')->first();
         $role = Role::where('role', '=', 'unemployed')->first();
         $user->assignRole($role);
 
-        DB::table('users')->insert([
-            'id' => Uuid::generate(),
-            'first_name' => 'Wessel',
-            'prefix' => 'van',
-            'last_name' => 'Kasteel',
-            'country' => 'Nederland',
-            'province' => 'Zuid-Holland',
-            'city' => 'Leiden',
-            'address' => 'Luisterlaan 14',
-            'email' => 'wessel@mail.com',
-            'password' => bcrypt('123456'),
-            'phone_number' => '0634343434',
-            'date_of_birth' => Carbon::create(2001, 7, 31, 0),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        $user = User::where('phone_number', '=', '0634343434')->first();
-        $role = Role::where('role', '=', 'unemployed')->first();
-        $user->assignRole($role);
-
-        DB::table('users')->insert([
-            'id' => Uuid::generate(),
-            'first_name' => 'Matt',
-            'last_name' => 'Verdoes',
-            'country' => 'Nederland',
-            'province' => 'Zuid-Holland',
-            'city' => 'Katwijk aan zee',
-            'address' => 'Neptunus 49',
-            'email' => 'matt@mail.com',
-            'password' => bcrypt('123456'),
-            'phone_number' => '0687654321',
-            'date_of_birth' => Carbon::create(2001, 12, 11, 0),
-            'external_cv' => 'https://www.linkedin.com/in/matt-verdoes-230728185/',
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        $user = User::where('phone_number', '=', '0687654321')->first();
-        $role = Role::where('role', '=', 'unemployed')->first();
-        $user->assignRole($role);
 
         DB::table('users')->insert([
             'id' => Uuid::generate(),
