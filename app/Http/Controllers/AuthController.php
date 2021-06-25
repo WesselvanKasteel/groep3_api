@@ -121,10 +121,27 @@ class AuthController extends Controller
         //     ], 200);
         // }
 
-        return response()->json([
-            'auth' => auth()->user(),
-            'message' => 'hallo wereld!'
-        ], 200);
+        try {
+            if (auth()->user() !== null) {
+                $auth = true;
+                $role = auth()->user()->with('roles')->first();
+
+                return response()->json([
+                    'auth' => $auth,
+                    'role' => $role->roles[0]->role
+                ], 200);
+            }
+
+            else {
+                throw new Exception("Error Processing Request", 1);
+            }
+            
+        } catch (\Throwable $th) {
+
+            return response()->json([
+                'auth' => false,
+            ], 200);
+        }
     }
 
     /**
