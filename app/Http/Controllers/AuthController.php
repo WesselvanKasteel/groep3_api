@@ -19,7 +19,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['register', 'login', 'check']]);
+        $this->middleware('auth:api', ['except' => ['register', 'login', 'checkUserRole']]);
     }
 
     public function register(UserRegisterRequest $request)
@@ -99,37 +99,37 @@ class AuthController extends Controller
 
     public function checkUserRole()
     {
-        // $auth
-        // $role;
+        $auth;
+        $role;
 
-        // if (auth()->user() === null) {
-        //     $auth = false;
-        //     $role = null;
+        if (auth()->user() === null) {
+            $auth = false;
+            $role = null;
 
-        //     return response()->json([
-        //         'auth' => $auth,
-        //     ], 401);
-        // }
+            return response()->json([
+                'auth' => $auth,
+            ], 200);
+        }
 
-        // else {
-        //     $auth = true;
-        //     $role = auth()->user()->with('role')->first();
+        else {
+            $auth = true;
+            $role = auth()->user()->with('roles')->first();
 
-        //     return response()->json([
-        //         'auth' => $auth,
-        //         'role' => $role
-        //     ], 200);
-        // }
+            return response()->json([
+                'auth' => $auth,
+                'role' => $role->roles[0]->role
+            ], 200);
+        }
         
-        $user = auth()->user();
-        $role = $user->roles()->first()->role;
-        $auth = true;
+        // $user = auth()->user();
+        // $role = $user->roles()->first()->role;
+        // $auth = true;
         
-        return response()->json([
-            'user' => $user,
-            'role' => $role,
-            'auth' => $auth,
-        ]);
+        // return response()->json([
+        //     'user' => $user,
+        //     'role' => $role,
+        //     'auth' => $auth,
+        // ]);
     }
 
     /**
