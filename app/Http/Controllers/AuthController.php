@@ -99,27 +99,32 @@ class AuthController extends Controller
 
     public function checkUserRole()
     {
-        $auth;
-        $role;
+        // $auth;
+        // $role;
 
-        if (auth()->user() === null) {
-            $auth = false;
-            $role = null;
+        // if (auth()->user() === null) {
+        //     $auth = false;
+        //     $role = null;
 
-            return response()->json([
-                'auth' => $auth,
-            ], 200);
-        }
+        //     return response()->json([
+        //         'auth' => $auth,
+        //     ], 200);
+        // }
 
-        else {
-            $auth = true;
-            $role = auth()->user()->with('roles')->first();
+        // else {
+        //     $auth = true;
+        //     $role = auth()->user()->with('roles')->first();
 
-            return response()->json([
-                'auth' => $auth,
-                'role' => $role->roles[0]->role
-            ], 200);
-        }
+        //     return response()->json([
+        //         'auth' => $auth,
+        //         'role' => $role->roles[0]->role
+        //     ], 200);
+        // }
+
+        return response()->json([
+            'auth' => auth()->user(),
+            'message' => 'hallo wereld!'
+        ], 200);
     }
 
     /**
