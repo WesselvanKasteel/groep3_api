@@ -2,14 +2,91 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Traits\Uuids;
+use App\Models\Vacancy;
+use App\Models\Registration;
+use App\Models\Video;
+use App\Models\Role;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, Uuids;
+
+    // public function role()
+    // {
+    //     return $this->hasOne(Role::class);
+    // }
+
+    public function premium()
+    {
+        return $this->hasOne(Premium::class);
+    }
+
+    public function vacancy()
+    {
+        return $this->belongsToMany(Vacancy::class);
+    }
+
+    public function vacancies()
+    {
+        return $this->belongsToMany(Vacancy::class);
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
+    }
+
+    public function education()
+    {
+        return $this->belongsToMany(Education::class);
+    }
+
+    public function jobs()
+    {
+        return $this->belongsToMany(Job::class);
+    }
+
+
+    // Registration relation
+    public function registrations()
+    {
+        return $this->belongsToMany(Registration::class);
+    }
+
+    public function assignRegistration(Registration $registration)
+    {
+        return $this->registrations()->save($registration);
+    }
+
+    // Video relation
+    public function videos()
+    {
+        return $this->belongsToMany(Video::class);
+    }
+
+    public function assignVideo(Video $video) 
+    {
+        return $this->videos()->save($video);
+    }
+
+    // Role relation
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function assignRole(Role $role) 
+    {
+        return $this->roles()->save($role);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -17,9 +94,20 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'company_name',
+        'first_name',
+        'prefix',
+        'last_name',
+        'country',
+        'province',
+        'city',
+        'address',
         'email',
         'password',
+        'phone_number',
+        'date_of_birth',
+        'picture',
+        'external_cv',
     ];
 
     /**
@@ -28,6 +116,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'id',
         'password',
         'remember_token',
     ];
@@ -39,5 +128,26 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'id' => 'string',
     ];
+
+    /**
+     * Get the identifier that will be stored in the subject claim of the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
