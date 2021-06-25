@@ -120,16 +120,6 @@ class AuthController extends Controller
                 'role' => $role->roles[0]->role
             ], 200);
         }
-        
-        // $user = auth()->user();
-        // $role = $user->roles()->first()->role;
-        // $auth = true;
-        
-        // return response()->json([
-        //     'user' => $user,
-        //     'role' => $role,
-        //     'auth' => $auth,
-        // ]);
     }
 
     /**
