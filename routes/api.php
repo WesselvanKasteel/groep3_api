@@ -36,7 +36,6 @@ Route::group(['prefix' => 'auth'], function() {
     Route::get('/check-user-role', [AuthController::class, 'checkUserRole']);
 });
 
-
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function() {
     Route::get('/', [ProfileController::class, 'show']);
     Route::put('/edit', [ProfileController::class, 'edit']);
